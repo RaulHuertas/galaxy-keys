@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://biwoyis7e0euu"]
+
+[ext_resource type="Script" uid="uid://dy7m8rc7s7r6x" path="res://eneme_ship_1.gd" id="1_7jqeu"]
+[ext_resource type="SpriteFrames" uid="uid://bnymged0trdtn" path="res://assets/flipbooks/enemy_ship_1.tres" id="1_mwu05"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7jqeu"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+corner_detail = 10
+
+[node name="root" type="Node2D" unique_id=1759155857]
+script = ExtResource("1_7jqeu")
+
+[node name="sprite" type="AnimatedSprite2D" parent="." unique_id=1563110004]
+unique_name_in_owner = true
+sprite_frames = ExtResource("1_mwu05")
+
+[node name="lock" type="Label" parent="." unique_id=1690200105]
+unique_name_in_owner = true
+offset_left = -18.0
+offset_top = 38.0
+offset_right = 22.0
+offset_bottom = 65.0
+theme_override_colors/font_color = Color(0.77008057, 0.7700808, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_7jqeu")
+text = "as"
+horizontal_alignment = 1
+vertical_alignment = 3
+uppercase = true

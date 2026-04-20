@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://do2m44yxtljsx" path="res://practice_game.gd" id="1_fsajk"]
 [ext_resource type="Texture2D" uid="uid://cnnkbnscagmnx" path="res://assets/flipbooks/blackShip.png" id="2_33f34"]
-[ext_resource type="SpriteFrames" uid="uid://bnymged0trdtn" path="res://assets/flipbooks/enemy_ship_1.tres" id="3_mwu5k"]
+[ext_resource type="PackedScene" uid="uid://biwoyis7e0euu" path="res://eneme_ship_1.tscn" id="3_mwu5k"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mwu5k"]
 atlas = ExtResource("2_33f34")
@@ -38,13 +38,12 @@ script = ExtResource("1_fsajk")
 
 [node name="nuty_ship" type="AnimatedSprite2D" parent="." unique_id=1600344172]
 unique_name_in_owner = true
-position = Vector2(101, 360)
+position = Vector2(104, 640)
 sprite_frames = SubResource("SpriteFrames_fsajk")
 frame = 2
 frame_progress = 0.264858
 flip_h = true
 
-[node name="enemy_ship" type="AnimatedSprite2D" parent="." unique_id=1349606778]
+[node name="enemy_ship_1" parent="." unique_id=1759155857 instance=ExtResource("3_mwu5k")]
 unique_name_in_owner = true
-position = Vector2(600, 293)
-sprite_frames = ExtResource("3_mwu5k")
+position = Vector2(1100, 351)
