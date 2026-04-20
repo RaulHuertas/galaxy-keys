@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://cpuu72yuh0oaj"]
+
+[ext_resource type="Script" uid="uid://do2m44yxtljsx" path="res://practice_game.gd" id="1_fsajk"]
+[ext_resource type="Texture2D" uid="uid://cnnkbnscagmnx" path="res://assets/flipbooks/blackShip.png" id="2_33f34"]
+[ext_resource type="SpriteFrames" uid="uid://bnymged0trdtn" path="res://assets/flipbooks/enemy_ship_1.tres" id="3_mwu5k"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mwu5k"]
+atlas = ExtResource("2_33f34")
+region = Rect2(0, 0, 133, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dy8u4"]
+atlas = ExtResource("2_33f34")
+region = Rect2(133, 0, 133, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dur40"]
+atlas = ExtResource("2_33f34")
+region = Rect2(266, 0, 133, 101)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fsajk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mwu5k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dy8u4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dur40")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="PracticeGame" type="Node2D" unique_id=1733512963]
+script = ExtResource("1_fsajk")
+
+[node name="nuty_ship" type="AnimatedSprite2D" parent="." unique_id=1600344172]
+unique_name_in_owner = true
+position = Vector2(101, 360)
+sprite_frames = SubResource("SpriteFrames_fsajk")
+frame = 2
+frame_progress = 0.264858
+flip_h = true
+
+[node name="enemy_ship" type="AnimatedSprite2D" parent="." unique_id=1349606778]
+unique_name_in_owner = true
+position = Vector2(600, 293)
+sprite_frames = ExtResource("3_mwu5k")

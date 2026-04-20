@@ -1,0 +1,32 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://bnymged0trdtn"]
+
+[ext_resource type="Texture2D" uid="uid://cdgpocp2hjopw" path="res://assets/flipbooks/enemy_ship_1.png" id="1_d237l"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_psiio"]
+atlas = ExtResource("1_d237l")
+region = Rect2(5, 0, 80, 99)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ritav"]
+atlas = ExtResource("1_d237l")
+region = Rect2(85, 0, 80, 99)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jm1jj"]
+atlas = ExtResource("1_d237l")
+region = Rect2(165, 0, 80, 99)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_psiio")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ritav")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jm1jj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]

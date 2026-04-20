@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://irb3ttd8xkgf"]
+
+[ext_resource type="Texture2D" uid="uid://cnnkbnscagmnx" path="res://assets/flipbooks/blackShip.png" id="1_ig7tw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ig7tw"]
+atlas = ExtResource("1_ig7tw")
+region = Rect2(0, 0, 133, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0xm2m"]
+atlas = ExtResource("1_ig7tw")
+region = Rect2(133, 0, 133, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h2yge"]
+atlas = ExtResource("1_ig7tw")
+region = Rect2(266, 0, 133, 101)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1bvp3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ig7tw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0xm2m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h2yge")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}]
+
+[node name="root" type="Node2D" unique_id=1217099509]
+
+[node name="main_ship" type="AnimatedSprite2D" parent="." unique_id=1657961746]
+unique_name_in_owner = true
+position = Vector2(66.75, 348.25)
+scale = Vector2(0.62030077, 0.72772276)
+sprite_frames = SubResource("SpriteFrames_1bvp3")
+flip_h = true
