@@ -3,18 +3,29 @@
 [ext_resource type="Script" uid="uid://dy7m8rc7s7r6x" path="res://eneme_ship_1.gd" id="1_7jqeu"]
 [ext_resource type="SpriteFrames" uid="uid://bnymged0trdtn" path="res://assets/flipbooks/enemy_ship_1.tres" id="1_mwu05"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7jqeu"]
-bg_color = Color(0.64913315, 1, 0.53049606, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2o1iv"]
+bg_color = Color(0.9916459, 0.9155579, 7.70092e-07, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
 border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
-corner_detail = 10
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7jqeu"]
+bg_color = Color(0.6, 0.9019608, 0.6, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
 
 [node name="root" type="Node2D" unique_id=1759155857]
 script = ExtResource("1_7jqeu")
@@ -24,43 +35,29 @@ unique_name_in_owner = true
 texture_filter = 1
 sprite_frames = ExtResource("1_mwu05")
 
-[node name="lock" type="Label" parent="." unique_id=1690200105]
+[node name="lock" type="RichTextLabel" parent="." unique_id=546811768]
 unique_name_in_owner = true
-visible = false
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = 52.0
-offset_right = 20.0
-offset_bottom = 79.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_colors/font_color = Color(0.47163987, 0.4716403, 1.92523e-07, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_styles/normal = SubResource("StyleBoxFlat_7jqeu")
-text = "lo"
+offset_left = -73.0
+offset_top = 45.0
+offset_right = 73.0
+offset_bottom = 85.0
+theme_override_font_sizes/normal_font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_2o1iv")
+bbcode_enabled = true
+text = "[color=blue]lo[/color][color=red]ck[/color]"
 horizontal_alignment = 1
-vertical_alignment = 3
-uppercase = true
+vertical_alignment = 1
 
-[node name="target" type="Label" parent="." unique_id=1780512518]
+[node name="target" type="RichTextLabel" parent="." unique_id=425814790]
 unique_name_in_owner = true
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -52.0
-offset_top = 50.0
-offset_right = 53.0
-offset_bottom = 77.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_colors/font_color = Color(0.1882353, 0.29411766, 0.93333334, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+offset_left = -73.0
+offset_top = 45.0
+offset_right = 73.0
+offset_bottom = 85.0
+theme_override_font_sizes/normal_font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_7jqeu")
-text = "ta"
+bbcode_enabled = true
+text = "[color=blue]tar[/color][color=red]get[/color]"
+shortcut_keys_enabled = false
 horizontal_alignment = 1
-vertical_alignment = 3
-uppercase = true
+vertical_alignment = 1

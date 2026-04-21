@@ -40,11 +40,11 @@ func set_assignations(lock:String, target:String, index : int =0, error_limit:in
 	self.index = index
 	self.error_limit = error_limit
 	self.error_count = 0
-	#UI
-	$lock.text = lock
-	$target.text = target
-	$lock.show()
-	$target.hide()
+	#UI [color=blue]blue[/color][color=red]red[/color]
+	%lock.text = "[color=blue]"+lock+"[/color]"
+	%target.text = "[color=blue]"+target+"[/color]"
+	%lock.show()
+	%target.hide()
 	
 
 func target_try(typed: String)->bool:
@@ -54,6 +54,10 @@ func target_try(typed: String)->bool:
 		return false
 	if(target[target_position]==typed):
 		target_position = target_position+1
+		#update ui
+		var ready_str = target.substr(0,target_position)
+		var missing_str = target.substr(target_position,target.length()-target_position)
+		%target.text = "[color=transparent]"+ready_str+"[/color]"+"[color=blue]"+missing_str+"[/color]"
 		if(target_position==target.length()):
 			destroyed.emit()
 		return true
