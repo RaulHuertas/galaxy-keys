@@ -7,6 +7,11 @@ const characters_level_1 = ["f","g","h","j"]
 
 const character_levels : Array = [characters_level_1]
 
+enum State {
+	FREE,
+	LOCKED
+}
+var state = State.FREE
 
 var current_level : int = 0
 func get_target_array(level: int =0, limit: int = 1)->String:
@@ -20,7 +25,7 @@ func get_target_array(level: int =0, limit: int = 1)->String:
 func _ready():
 	print(%nuty_ship)
 	%nuty_ship.play()
-	
+	state = State.FREE		
 	
 	#Initialize enemies
 	enemy_ships.append(%enemy_ship_1)
@@ -35,8 +40,20 @@ func aim_to_ship(ship_to_rotate:Node2D, target : Node2D):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	#make the main ship aim it's locked enemy
-	aim_to_ship(%nuty_ship, %enemy_ship_1.get_sprite())
+	if state == State.LOCKED:
+		aim_to_ship(%nuty_ship, %enemy_ship_1.get_sprite())
+	else:
+		%nuty_ship.rotation = %nuty_ship.rotation+0.5*delta
+	
 	
 	#make the enemy shis aim the main ship
 	aim_to_ship(%enemy_ship_1.get_sprite(), %nuty_ship)
 	pass
+
+func _input(event):
+	if event is InputEventKey and event.pressed and not event.echo:
+		var key = OS.get_keycode_string(event.keycode).to_lower()
+		for ship in enemy_ships:
+			if ship.lock_sequence == key:
+				ship.make_locked()
+				self.state = State.LOCKED

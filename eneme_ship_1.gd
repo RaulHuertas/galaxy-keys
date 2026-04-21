@@ -16,7 +16,7 @@ enum FreedMode {
 }
 
 var state : State = State.FREE
-var lock : String = ""
+var lock_sequence : String = ""
 var target: String = ""
 var target_position: int = 0
 var index : int = 0
@@ -34,19 +34,23 @@ func _ready():
 func get_sprite():
 	return %sprite
 
-func set_assignations(lock:String, target:String, index : int =0, error_limit:int =3 ):
-	self.lock = lock
-	self.target = lock
+func set_assignations(lock_sequence:String, target:String, index : int =0, error_limit:int =3 ):
+	self.lock_sequence = lock_sequence
+	self.target = target
 	self.index = index
 	self.error_limit = error_limit
 	self.error_count = 0
 	#UI [color=blue]blue[/color][color=red]red[/color]
-	%lock.text = "[color=blue]"+lock+"[/color]"
+	%lock.text = "[color=blue]"+lock_sequence+"[/color]"
 	%target.text = "[color=blue]"+target+"[/color]"
 	%lock.show()
 	%target.hide()
 	
-
+func make_locked()->void:
+	self.state = State.LOCKED
+	%lock.hide()
+	%target.show()
+	
 func target_try(typed: String)->bool:
 	if target == null:
 		return false
