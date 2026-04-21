@@ -5,6 +5,8 @@ extends Node2D
 func _ready():
 	%sprite.play()
 	
+func sprite():
+	return %sprite
 	
 func kill():
 	%sprite.hide()

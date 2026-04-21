@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://do2m44yxtljsx" path="res://practice_game.gd" id="1_fsajk"]
 [ext_resource type="Texture2D" uid="uid://cnnkbnscagmnx" path="res://assets/flipbooks/blackShip.png" id="2_33f34"]
+[ext_resource type="Texture2D" uid="uid://bxar444p85ns1" path="res://assets/flipbooks/background1.png" id="2_dy8u4"]
 [ext_resource type="PackedScene" uid="uid://biwoyis7e0euu" path="res://eneme_ship_1.tscn" id="3_mwu5k"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mwu5k"]
@@ -30,20 +31,74 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
-"speed": 5.0
+"speed": 7.0
 }]
+
+[sub_resource type="Animation" id="Animation_mwu5k"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("enemy_ship_1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1166, 141)]
+}
+
+[sub_resource type="Animation" id="Animation_dy8u4"]
+resource_name = "enemy_test"
+length = 5.91
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("enemy_ship_1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.033333335, 3.01, 5.9100003),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1166, 141), Vector2(1168, 647), Vector2(1166.064, 157.66)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dur40"]
+_data = {
+&"RESET": SubResource("Animation_mwu5k"),
+&"enemy_test": SubResource("Animation_dy8u4")
+}
 
 [node name="PracticeGame" type="Node2D" unique_id=1733512963]
 script = ExtResource("1_fsajk")
 
+[node name="Parallax2D" type="Parallax2D" parent="." unique_id=344553594]
+repeat_size = Vector2(1280, 0)
+autoscroll = Vector2(70, 0)
+repeat_times = 4
+follow_viewport = false
+ignore_camera_scroll = true
+
+[node name="Background1" type="Sprite2D" parent="Parallax2D" unique_id=1596954187]
+texture_filter = 1
+position = Vector2(641, 388)
+scale = Vector2(1, 1.2)
+texture = ExtResource("2_dy8u4")
+
 [node name="nuty_ship" type="AnimatedSprite2D" parent="." unique_id=1600344172]
 unique_name_in_owner = true
-position = Vector2(104, 640)
+texture_filter = 1
+position = Vector2(104, 384)
 sprite_frames = SubResource("SpriteFrames_fsajk")
-frame = 2
-frame_progress = 0.264858
-flip_h = true
+frame_progress = 0.34716627
 
 [node name="enemy_ship_1" parent="." unique_id=1759155857 instance=ExtResource("3_mwu5k")]
 unique_name_in_owner = true
-position = Vector2(1100, 351)
+position = Vector2(1166, 141)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=341435190]
+libraries/ = SubResource("AnimationLibrary_dur40")
+autoplay = &"enemy_test"

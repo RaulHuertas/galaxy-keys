@@ -21,6 +21,7 @@ script = ExtResource("1_7jqeu")
 
 [node name="sprite" type="AnimatedSprite2D" parent="." unique_id=1563110004]
 unique_name_in_owner = true
+texture_filter = 1
 sprite_frames = ExtResource("1_mwu05")
 
 [node name="lock" type="Label" parent="." unique_id=1690200105]
@@ -29,7 +30,7 @@ offset_left = -18.0
 offset_top = 38.0
 offset_right = 22.0
 offset_bottom = 65.0
-theme_override_colors/font_color = Color(0.77008057, 0.7700808, 0, 1)
+theme_override_colors/font_color = Color(0.47163987, 0.4716403, 1.92523e-07, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_7jqeu")
 text = "as"
