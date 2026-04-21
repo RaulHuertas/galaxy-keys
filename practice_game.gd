@@ -1,5 +1,7 @@
 extends Node2D
 
+@onready var enemy_ship_scene_1 : Resource = preload("res://enemy_ship_1.tscn")
+
 var enemy_ships : Array = []
 var current_ship : EnemyShip = null
 # Called when the node enters the scene tree for the first time.
@@ -21,14 +23,22 @@ func get_target_array(level: int =0, limit: int = 1)->String:
 		result = result+(character_levels[level][random_index])
 	return result
 
-
 func _ready():
 	print(%nuty_ship)
 	%nuty_ship.play()
 	state = State.FREE		
+	%enemy_ship_1.hide()
 	
 	#Initialize enemies
-	enemy_ships.append(%enemy_ship_1)
+	#enemy_ships.append(%enemy_ship_1)
+	for enemy in character_levels[current_level].size():
+		var new_ship = enemy_ship_scene_1.instantiate()
+		new_ship.position.x= 600
+		new_ship.position.y= 400
+		enemy_ships.append(new_ship)
+		new_ship.show()
+		print("enemy created")
+	
 	for i in enemy_ships.size():
 		var ship = enemy_ships[i]
 		ship.set_assignations(get_target_array(current_level,1),get_target_array(current_level,5))
@@ -64,6 +74,7 @@ func _input(event):
 			print("Hit!")
 			if current_ship.is_destroyed():
 				print("Hit and destroyed!")
+				state = State.FREE
 			pass
 			
 			
