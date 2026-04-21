@@ -35,6 +35,7 @@ func _ready():
 		var new_ship = enemy_ship_scene_1.instantiate()
 		new_ship.position.x= 600
 		new_ship.position.y= 400
+		self.add_child(new_ship)
 		enemy_ships.append(new_ship)
 		new_ship.show()
 		print("enemy created")
