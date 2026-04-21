@@ -1,7 +1,7 @@
 extends Node2D
 
 var enemy_ships : Array = []
-
+var current_ship : EnemyShip = null
 # Called when the node enters the scene tree for the first time.
 const characters_level_1 = ["f","g","h","j"]
 
@@ -53,7 +53,18 @@ func _process(delta):
 func _input(event):
 	if event is InputEventKey and event.pressed and not event.echo:
 		var key = OS.get_keycode_string(event.keycode).to_lower()
-		for ship in enemy_ships:
-			if ship.lock_sequence == key:
-				ship.make_locked()
-				self.state = State.LOCKED
+		if state == State.FREE:
+			for ship in enemy_ships:
+				if ship.visible && ship.lock_sequence == key:
+					ship.make_locked()
+					current_ship = ship
+					self.state = State.LOCKED
+		elif state == State.LOCKED:
+			var hit = current_ship.target_try(key)
+			print("Hit!")
+			if current_ship.is_destroyed():
+				print("Hit and destroyed!")
+			pass
+			
+			
+			

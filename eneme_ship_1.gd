@@ -1,3 +1,4 @@
+class_name EnemyShip
 extends Node2D
 
 @onready var sprite = %sprite
@@ -56,6 +57,8 @@ func target_try(typed: String)->bool:
 		return false
 	if state == State.FREE:
 		return false
+	if state == State.DESTROYED:
+		return false
 	if(target[target_position]==typed):
 		target_position = target_position+1
 		#update ui
@@ -64,6 +67,8 @@ func target_try(typed: String)->bool:
 		%target.text = "[color=transparent]"+ready_str+"[/color]"+"[color=blue]"+missing_str+"[/color]"
 		if(target_position==target.length()):
 			destroyed.emit()
+			hide()
+			state = State.DESTROYED
 		return true
 	else :
 		error_count = error_count+1
@@ -75,7 +80,9 @@ func target_try(typed: String)->bool:
 		
 		return false
 		
-
+func is_destroyed()->bool:
+	return state == State.DESTROYED
+	
 func kill():
 	%sprite.hide()
 
