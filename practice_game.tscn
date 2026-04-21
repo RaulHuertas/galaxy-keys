@@ -88,7 +88,7 @@ position = Vector2(640, 384.00003)
 scale = Vector2(1, 1.2)
 texture = ExtResource("2_dy8u4")
 
-[node name="nuty_ship" type="AnimatedSprite2D" parent="." unique_id=1600344172]
+[node name="main_ship" type="AnimatedSprite2D" parent="." unique_id=1600344172]
 unique_name_in_owner = true
 texture_filter = 1
 position = Vector2(104, 384)
