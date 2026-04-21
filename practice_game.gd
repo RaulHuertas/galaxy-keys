@@ -45,10 +45,12 @@ func spawn_enemies():
 		new_ship.show()
 		print("enemy created")
 	
+	var random_offset:int = randi()
 	for i in enemy_ships.size():
 		var ship = enemy_ships[i]
+		
 		ship.set_assignations(
-			character_levels[current_level][i],
+			character_levels[current_level][(i+random_offset)%enemy_ships.size()],
 			get_target_array(current_level,5)
 		)
 		
