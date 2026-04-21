@@ -6,7 +6,7 @@ var enemy_ships : Array = []
 var current_ship : EnemyShip = null
 # Called when the node enters the scene tree for the first time.
 const characters_level_1 = ["f","g","h","j"]
-
+@onready var main_chip = %nuty_ship
 const character_levels : Array = [characters_level_1]
 
 enum State {
@@ -31,10 +31,13 @@ func _ready():
 	
 	#Initialize enemies
 	#enemy_ships.append(%enemy_ship_1)
+	var viewport_size = get_viewport_rect().size
+	var right_x_min = viewport_size.x * 0.60
+	var right_x_max = viewport_size.x - 50
 	for enemy in character_levels[current_level].size():
 		var new_ship = enemy_ship_scene_1.instantiate()
-		new_ship.position.x= 600
-		new_ship.position.y= 400
+		new_ship.position.x = randf_range(right_x_min, right_x_max)
+		new_ship.position.y = randf_range(50, viewport_size.y - 50)
 		self.add_child(new_ship)
 		enemy_ships.append(new_ship)
 		new_ship.show()
@@ -55,7 +58,10 @@ func _process(delta):
 		aim_to_ship(%nuty_ship, %enemy_ship_1.get_sprite())
 	else:
 		%nuty_ship.rotation = %nuty_ship.rotation+0.5*delta
-	
+		
+	for i in enemy_ships.size():
+			var ship = enemy_ships[i]
+			aim_to_ship(ship, main_chip)
 	
 	#make the enemy shis aim the main ship
 	aim_to_ship(%enemy_ship_1.get_sprite(), %nuty_ship)
@@ -70,6 +76,7 @@ func _input(event):
 					ship.make_locked()
 					current_ship = ship
 					self.state = State.LOCKED
+					break
 		elif state == State.LOCKED:
 			var hit = current_ship.target_try(key)
 			print("Hit!")
