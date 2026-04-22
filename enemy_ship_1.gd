@@ -13,6 +13,7 @@ enum State {
 }
 
 enum FreedMode {
+	NONE,
 	ERROR_LIMIT,
 	
 }
@@ -62,6 +63,7 @@ func make_locked()->void:
 	aim_anims.play("aim_scale")
 	
 func target_try(typed: String)->bool:
+
 	if target == null:
 		return false
 	if state == State.FREE:
@@ -80,12 +82,12 @@ func target_try(typed: String)->bool:
 			state = State.DESTROYED
 		return true
 	else :
-		error_count = error_count+1
-		if error_count==error_limit:
-			state = State.FREE
-			freed.emit()
-		else:
-			wrong_target_code.emit(target_position, target.length())
+		#error_count = error_count+1
+		#if error_count==error_limit:
+		#	state = State.FREE
+		#	freed.emit()
+		#else:
+		#	wrong_target_code.emit(target_position, target.length())
 		
 		return false
 		
