@@ -40,6 +40,7 @@ script = ExtResource("1_bpdev")
 
 [node name="main_ship" type="AnimatedSprite2D" parent="." unique_id=996849682]
 unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.952)
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_fsajk")
 frame_progress = 0.34716627

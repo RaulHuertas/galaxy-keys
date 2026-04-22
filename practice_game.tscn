@@ -5,6 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://biwoyis7e0euu" path="res://enemy_ship_1.tscn" id="3_mwu5k"]
 [ext_resource type="PackedScene" uid="uid://o3j5734mn7e3" path="res://main_ship.tscn" id="4_dy8u4"]
 [ext_resource type="Texture2D" uid="uid://dv8httmt75gvo" path="res://assets/flipbooks/main_ship_beam_solo.png" id="5_dur40"]
+[ext_resource type="PackedScene" uid="uid://t3coxrbls8x6" path="res://HealthBar.tscn" id="6_hq0y4"]
+[ext_resource type="Script" uid="uid://bqlyn7ugfjunv" path="res://health_bar.gd" id="7_62tn4"]
 
 [sub_resource type="Gradient" id="Gradient_dy8u4"]
 
@@ -95,9 +97,14 @@ autoplay = &"enemy_test"
 
 [node name="main_ship" parent="." unique_id=410212603 instance=ExtResource("4_dy8u4")]
 unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.6039216)
 position = Vector2(221, 362)
 
 [node name="main_ship_beam" type="Sprite2D" parent="." unique_id=1449660018]
 unique_name_in_owner = true
 position = Vector2(441, 370)
 texture = ExtResource("5_dur40")
+
+[node name="health_bar" parent="." unique_id=1435057563 instance=ExtResource("6_hq0y4")]
+unique_name_in_owner = true
+script = ExtResource("7_62tn4")
