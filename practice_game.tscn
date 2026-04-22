@@ -58,6 +58,9 @@ _data = {
 &"enemy_test": SubResource("Animation_dy8u4")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_62tn4"]
+bg_color = Color(0.011087578, 0.01108758, 0.011087572, 0.43529412)
+
 [node name="PracticeGame" type="Node2D" unique_id=1733512963]
 script = ExtResource("1_fsajk")
 
@@ -108,3 +111,25 @@ texture = ExtResource("5_dur40")
 [node name="health_bar" parent="." unique_id=1435057563 instance=ExtResource("6_hq0y4")]
 unique_name_in_owner = true
 script = ExtResource("7_62tn4")
+
+[node name="dead_label" type="Label" parent="." unique_id=1843921365]
+unique_name_in_owner = true
+offset_right = 1280.0
+offset_bottom = 768.0
+theme_override_font_sizes/font_size = 120
+theme_override_styles/normal = SubResource("StyleBoxFlat_62tn4")
+text = "YOU DIED"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="dead_label" unique_id=2139022117]
+layout_mode = 0
+offset_left = 414.0
+offset_top = 525.0
+offset_right = 890.0
+offset_bottom = 614.0
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+text = "Try [color=red]A[/color]gain"
+horizontal_alignment = 1
+vertical_alignment = 1

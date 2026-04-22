@@ -25,6 +25,7 @@ var target_position: int = 0
 var index : int = 0
 var error_limit = 3
 var error_count = 0
+@onready var rot_direction : float = randf_range(-1,1)
 
 signal wrong_target_code(position:int, total:int)
 signal destroyed()
@@ -100,4 +101,6 @@ func kill():
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if state==State.FREE:
+		sprite.rotation = sprite.rotation+rot_direction*delta*PI/2
 	pass
