@@ -1,38 +1,9 @@
 [gd_scene format=3 uid="uid://cpuu72yuh0oaj"]
 
 [ext_resource type="Script" uid="uid://do2m44yxtljsx" path="res://practice_game.gd" id="1_fsajk"]
-[ext_resource type="Texture2D" uid="uid://cnnkbnscagmnx" path="res://assets/flipbooks/blackShip.png" id="2_33f34"]
 [ext_resource type="Texture2D" uid="uid://bxar444p85ns1" path="res://assets/flipbooks/background1.png" id="2_dy8u4"]
 [ext_resource type="PackedScene" uid="uid://biwoyis7e0euu" path="res://enemy_ship_1.tscn" id="3_mwu5k"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mwu5k"]
-atlas = ExtResource("2_33f34")
-region = Rect2(0, 0, 133, 101)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dy8u4"]
-atlas = ExtResource("2_33f34")
-region = Rect2(133, 0, 133, 101)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dur40"]
-atlas = ExtResource("2_33f34")
-region = Rect2(266, 0, 133, 101)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_fsajk"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mwu5k")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dy8u4")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dur40")
-}],
-"loop": true,
-"name": &"default",
-"speed": 7.0
-}]
+[ext_resource type="PackedScene" uid="uid://o3j5734mn7e3" path="res://main_ship.tscn" id="4_dy8u4"]
 
 [sub_resource type="Animation" id="Animation_mwu5k"]
 length = 0.001
@@ -88,13 +59,6 @@ position = Vector2(640, 384.00003)
 scale = Vector2(1, 1.2)
 texture = ExtResource("2_dy8u4")
 
-[node name="main_ship" type="AnimatedSprite2D" parent="." unique_id=1600344172]
-unique_name_in_owner = true
-texture_filter = 1
-position = Vector2(104, 384)
-sprite_frames = SubResource("SpriteFrames_fsajk")
-frame_progress = 0.34716627
-
 [node name="enemy_ship_1" parent="." unique_id=1759155857 instance=ExtResource("3_mwu5k")]
 unique_name_in_owner = true
 position = Vector2(1166, 141)
@@ -102,3 +66,7 @@ position = Vector2(1166, 141)
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=341435190]
 libraries/ = SubResource("AnimationLibrary_dur40")
 autoplay = &"enemy_test"
+
+[node name="main_ship" parent="." unique_id=410212603 instance=ExtResource("4_dy8u4")]
+unique_name_in_owner = true
+position = Vector2(221, 362)

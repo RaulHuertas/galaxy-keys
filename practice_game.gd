@@ -6,7 +6,7 @@ var enemy_ships : Array = []
 var current_ship : EnemyShip = null
 # Called when the node enters the scene tree for the first time.
 const characters_level_1 = ["f","g","h","j"]
-@onready var main_ship = %main_ship
+@onready var main_ship : MainShip = %main_ship
 const character_levels : Array = [characters_level_1]
 
 enum State {
@@ -98,12 +98,17 @@ func _input(event):
 			for ship in enemy_ships:
 				if ship.visible && ship.lock_sequence == key:
 					ship.make_locked()
+					main_ship.play_lock_sound()
 					current_ship = ship
 					self.state = State.LOCKED
 					break
 		elif state == State.LOCKED:
 			var hit = current_ship.target_try(key)
 			print("Hit!")
+			if hit:
+				main_ship.play_shoot_sound()
+			else:
+				main_ship.play_failed_sound()
 			if current_ship.is_destroyed():
 				print("Hit and destroyed!")
 				state = State.FREE
