@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://o3j5734mn7e3"]
+
+[ext_resource type="Script" uid="uid://d1hdbk84jyy15" path="res://main_ship.gd" id="1_bpdev"]
+[ext_resource type="Texture2D" uid="uid://cnnkbnscagmnx" path="res://assets/flipbooks/blackShip.png" id="1_qwyf7"]
+[ext_resource type="AudioStream" uid="uid://b2fvlagv12jmk" path="res://assets/sounds/laserShoot_main.wav" id="3_yjol7"]
+[ext_resource type="AudioStream" uid="uid://de28s1jttlbka" path="res://assets/sounds/lock.wav" id="4_qsb1n"]
+[ext_resource type="AudioStream" uid="uid://bcfhx5n430a23" path="res://assets/sounds/failed.wav" id="5_smaqd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mwu5k"]
+atlas = ExtResource("1_qwyf7")
+region = Rect2(0, 0, 133, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dy8u4"]
+atlas = ExtResource("1_qwyf7")
+region = Rect2(133, 0, 133, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dur40"]
+atlas = ExtResource("1_qwyf7")
+region = Rect2(266, 0, 133, 101)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fsajk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mwu5k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dy8u4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dur40")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}]
+
+[node name="Node2D" type="Node2D" unique_id=410212603]
+script = ExtResource("1_bpdev")
+
+[node name="main_ship" type="AnimatedSprite2D" parent="." unique_id=996849682]
+unique_name_in_owner = true
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_fsajk")
+frame_progress = 0.34716627
+
+[node name="shoot_sound" type="AudioStreamPlayer2D" parent="." unique_id=1952474037]
+unique_name_in_owner = true
+stream = ExtResource("3_yjol7")
+
+[node name="lock_sound" type="AudioStreamPlayer2D" parent="." unique_id=1945853352]
+unique_name_in_owner = true
+stream = ExtResource("4_qsb1n")
+
+[node name="failed_sound" type="AudioStreamPlayer2D" parent="." unique_id=200870660]
+unique_name_in_owner = true
+stream = ExtResource("5_smaqd")
