@@ -5,6 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://b2fvlagv12jmk" path="res://assets/sounds/laserShoot_main.wav" id="3_yjol7"]
 [ext_resource type="AudioStream" uid="uid://de28s1jttlbka" path="res://assets/sounds/lock.wav" id="4_qsb1n"]
 [ext_resource type="AudioStream" uid="uid://bcfhx5n430a23" path="res://assets/sounds/failed.wav" id="5_smaqd"]
+[ext_resource type="AudioStream" uid="uid://3jijvhkayi55" path="res://assets/sounds/unlock.wav" id="6_so7a5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mwu5k"]
 atlas = ExtResource("1_qwyf7")
@@ -56,3 +57,7 @@ stream = ExtResource("4_qsb1n")
 [node name="failed_sound" type="AudioStreamPlayer2D" parent="." unique_id=200870660]
 unique_name_in_owner = true
 stream = ExtResource("5_smaqd")
+
+[node name="unlock_sound" type="AudioStreamPlayer2D" parent="." unique_id=549441]
+unique_name_in_owner = true
+stream = ExtResource("6_so7a5")
