@@ -12,7 +12,7 @@ extends Node2D
 		if(camouflaged==value):
 			return
 		camouflaged = value
-		if value:
+		if camouflaged:
 			sprite.modulate.a = 1.0
 		else:
 			sprite.modulate.a = 255.0

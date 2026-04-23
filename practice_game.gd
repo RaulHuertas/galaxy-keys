@@ -7,6 +7,7 @@ extends Node2D
 @onready var target_beam : Line2D = %target_beam
 @onready var enemy_beam : Line2D = %enemy_beam
 @onready var main_ship_beam : Sprite2D = %main_ship_beam
+@onready var enemy_ship_beam : Sprite2D = %enemy_ship_beam
 @onready var status_bar : HealthBar = %status_bar
 @onready var dead_label : Control = %dead_label
 
@@ -38,18 +39,20 @@ func get_target_array(level: int =0, limit: int = 1)->String:
 
 var camo_tween
 func reactivate_camo():
-	if camo_tween:
-		camo_tween.kill() # Abort the previous animation.
+	cancel_camo() # Abort the previous animation.
 	camo_tween = create_tween()
 	main_ship.camouflaged = true
 	status_bar.camouflage = 100
-	camo_tween.tween_property(status_bar, "camouflage", 0, 0.8)
+	camo_tween.tween_property(status_bar, "camouflage", 0, 1.0)
 	camo_tween.tween_callback(camo_down)
 	
+func cancel_camo():
+	if camo_tween:
+		camo_tween.kill()
+
 func camo_down():
 	main_ship.camouflaged = false
-	print("camo down!")
-	
+
 func spawn_enemies():
 	for ship in enemy_ships:
 		ship.queue_free()
@@ -98,6 +101,7 @@ func _ready():
 func restart_game():
 	status_bar.health = 100
 	main_ship_beam.hide()
+	enemy_ship_beam.hide()
 	target_beam.hide()
 	enemy_beam.hide()
 	main_ship.camouflaged = true
@@ -116,8 +120,13 @@ func _process(delta):
 		target_beam.set_point_position(1, current_ship.position)
 		
 		aim_to_ship( current_ship.get_sprite(), main_ship.sprite)
-	else:
-		pass
+	elif state == State.FREE:
+		if !main_ship.camouflaged:
+			print("NO CAMO")
+			trigger_enemy_shot()
+			reactivate_camo()
+			shoot_received(18)
+			pass
 	#for i in enemy_ships.size():
 	#		var ship = enemy_ships[i]
 	#		aim_to_ship(ship.get_sprite(), main_ship)
@@ -144,7 +153,7 @@ func die():
 	state = State.DEAD
 	dead_label.show()
 	
-func animate_shot(posA: Node2D, posB: Node2D):
+func animate_shot(posA: Node2D, posB: Node2D, sprite:Node2D = main_ship_beam):
 	var tween = get_tree().create_tween()
 	main_ship_beam.position = posA.position
 	main_ship_beam.scale = Vector2(1.0, 1.0)
@@ -152,6 +161,11 @@ func animate_shot(posA: Node2D, posB: Node2D):
 	tween.tween_property(main_ship_beam, "position", posB.position, 0.25)
 	tween.tween_property(main_ship_beam, "scale", Vector2(), 0.05)				
 	tween.tween_callback(main_ship_beam.hide)
+	
+func trigger_enemy_shot():
+	for ship in enemy_ships:
+		if ship.visible:
+			animate_shot(ship, main_ship, enemy_ship_beam)
 	
 func _input(event):
 	if event is InputEventKey and event.pressed and not event.echo:
@@ -168,10 +182,13 @@ func _input(event):
 					ship.make_locked()
 					main_ship.play_lock_sound()
 					main_ship.camouflaged = false
+					cancel_camo()
 					current_ship = ship
 					self.state = State.LOCKED
 					target_beam.show()
 					break
+			
+			
 		elif state == State.LOCKED: # SHOOT TO THE ENEMIES
 			var hit = current_ship.target_try(key)
 			if hit:
@@ -194,7 +211,7 @@ func _input(event):
 				print("Enemy destroyed!")
 				state = State.FREE
 				target_beam.hide()
-				main_ship.camouflaged = true
+				reactivate_camo()
 				main_ship.play_unlock_sound()
 				if remaining_ships()==0:
 					spawn_enemies()
