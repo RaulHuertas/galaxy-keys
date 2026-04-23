@@ -42,8 +42,8 @@ func spawn_enemies():
 	var max_radius = radius*min_range
 	var min_radius = radius*max_range
 	
-	
-	for enemy in character_levels[current_level].size():
+	var enemies_to_spawn = min(character_levels[current_level].size(),9)
+	for enemy in enemies_to_spawn:
 		var new_ship = enemy_ship_scene_1.instantiate()
 		var random_angle = randf_range(0.25*PI, -1.25*PI)
 		var random_range = randf_range(min_range, max_range)

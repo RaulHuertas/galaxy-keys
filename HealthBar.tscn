@@ -15,15 +15,31 @@ corner_radius_bottom_left = 2
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ypcvb"]
 bg_color = Color(0, 0.7917869, 0.2400937, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n0c2p"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7onog"]
+bg_color = Color(0.21802102, 0.11207495, 1, 1)
+
 [node name="HealthBar" type="Node2D" unique_id=1435057563]
 
-[node name="bar" type="ProgressBar" parent="." unique_id=2109302076]
+[node name="health" type="ProgressBar" parent="." unique_id=2109302076]
 unique_name_in_owner = true
 offset_top = 741.0
 offset_right = 1280.0
 offset_bottom = 768.0
 theme_override_styles/background = SubResource("StyleBoxFlat_xx2kh")
 theme_override_styles/fill = SubResource("StyleBoxFlat_ypcvb")
+step = 0.1
+value = 90.0
+show_percentage = false
+
+[node name="camouflage" type="ProgressBar" parent="." unique_id=690728254]
+unique_name_in_owner = true
+offset_top = 727.0
+offset_right = 1280.0
+offset_bottom = 740.0
+theme_override_styles/background = SubResource("StyleBoxFlat_n0c2p")
+theme_override_styles/fill = SubResource("StyleBoxFlat_7onog")
 step = 0.1
 value = 90.0
 show_percentage = false
