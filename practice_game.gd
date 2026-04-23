@@ -166,6 +166,7 @@ func trigger_enemy_shot():
 	for ship in enemy_ships:
 		if ship.visible:
 			animate_shot(ship, main_ship, enemy_ship_beam)
+			main_ship.play_failed_sound()
 	
 func _input(event):
 	if event is InputEventKey and event.pressed and not event.echo:
