@@ -36,6 +36,20 @@ func get_target_array(level: int =0, limit: int = 1)->String:
 		result = result+(character_levels[level][random_index])
 	return result
 
+var camo_tween
+func reactivate_camo():
+	if camo_tween:
+		camo_tween.kill() # Abort the previous animation.
+	camo_tween = create_tween()
+	main_ship.camouflaged = true
+	status_bar.camouflage = 100
+	camo_tween.tween_property(status_bar, "camouflage", 0, 0.8)
+	camo_tween.tween_callback(camo_down)
+	
+func camo_down():
+	main_ship.camouflaged = false
+	print("camo down!")
+	
 func spawn_enemies():
 	for ship in enemy_ships:
 		ship.queue_free()
@@ -88,6 +102,7 @@ func restart_game():
 	enemy_beam.hide()
 	main_ship.camouflaged = true
 	spawn_enemies()
+	reactivate_camo()
 	
 func aim_to_ship(ship_to_rotate:Node2D, target : Node2D):
 	var direction = target.global_position - ship_to_rotate.global_position

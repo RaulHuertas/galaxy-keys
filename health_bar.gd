@@ -18,10 +18,10 @@ extends Node2D
 	get():
 		return health
 		
-@export var camouflage = 100:
+@export var camouflage : float = 100.0:
 	set(value):
 		camouflage = value
-		camouflage.value = value
+		camouflage_bar.value = value
 	get():
 		return health
 
