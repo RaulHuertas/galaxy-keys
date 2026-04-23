@@ -90,6 +90,19 @@ end_cap_mode = 2
 round_precision = 9
 antialiased = true
 
+[node name="enemy_beam" type="Line2D" parent="." unique_id=1364799210]
+unique_name_in_owner = true
+points = PackedVector2Array(0, 0, 50.94757, 50.9476)
+closed = true
+default_color = Color(0.8854879, 0, 0.25766784, 1)
+texture = SubResource("NoiseTexture2D_hq0y4")
+texture_mode = 1
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+round_precision = 9
+antialiased = true
+
 [node name="enemy_ship_1" parent="." unique_id=1759155857 instance=ExtResource("3_mwu5k")]
 unique_name_in_owner = true
 position = Vector2(1166, 141)
@@ -108,7 +121,7 @@ unique_name_in_owner = true
 position = Vector2(441, 370)
 texture = ExtResource("5_dur40")
 
-[node name="health_bar" parent="." unique_id=1435057563 instance=ExtResource("6_hq0y4")]
+[node name="status_bar" parent="." unique_id=1435057563 instance=ExtResource("6_hq0y4")]
 unique_name_in_owner = true
 script = ExtResource("7_62tn4")
 

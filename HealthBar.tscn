@@ -16,6 +16,16 @@ corner_radius_bottom_left = 2
 bg_color = Color(0, 0.7917869, 0.2400937, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n0c2p"]
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+corner_detail = 4
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7onog"]
 bg_color = Color(0.21802102, 0.11207495, 1, 1)
@@ -41,5 +51,6 @@ offset_bottom = 740.0
 theme_override_styles/background = SubResource("StyleBoxFlat_n0c2p")
 theme_override_styles/fill = SubResource("StyleBoxFlat_7onog")
 step = 0.1
-value = 90.0
+value = 66.0
+rounded = true
 show_percentage = false

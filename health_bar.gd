@@ -15,7 +15,13 @@ extends Node2D
 				style.bg_color = Color.YELLOW
 			else:
 				style.bg_color = Color.GREEN
-
+	get():
+		return health
+		
+@export var camouflage = 100:
+	set(value):
+		camouflage = value
+		camouflage.value = value
 	get():
 		return health
 

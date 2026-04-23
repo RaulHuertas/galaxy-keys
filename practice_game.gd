@@ -5,8 +5,9 @@ extends Node2D
 #ui controls
 @onready var main_ship : MainShip = %main_ship
 @onready var target_beam : Line2D = %target_beam
+@onready var enemy_beam : Line2D = %enemy_beam
 @onready var main_ship_beam : Sprite2D = %main_ship_beam
-@onready var health_bar : HealthBar = %health_bar
+@onready var status_bar : HealthBar = %status_bar
 @onready var dead_label : Control = %dead_label
 
 var enemy_ships : Array = []
@@ -20,7 +21,12 @@ enum State {
 	LOCKED,
 	DEAD
 }
-var state = State.FREE
+
+@export var state = State.FREE:
+	set(value):
+		state = value
+	get():
+		return state
 
 var current_level : int = 0
 func get_target_array(level: int =0, limit: int = 1)->String:
@@ -28,7 +34,6 @@ func get_target_array(level: int =0, limit: int = 1)->String:
 	for i in limit:
 		var random_index : int = randi()%character_levels[level].size()
 		result = result+(character_levels[level][random_index])
-
 	return result
 
 func spawn_enemies():
@@ -57,19 +62,17 @@ func spawn_enemies():
 		self.add_child(new_ship)
 		enemy_ships.append(new_ship)
 		new_ship.show()
-		print("enemy created")
 	
 	var random_offset:int = randi()
 	for i in enemy_ships.size():
 		var ship = enemy_ships[i]
-		
 		ship.set_assignations(
 			character_levels[current_level][(i+random_offset)%enemy_ships.size()],
 			get_target_array(current_level,5)
 		)
 		
 func _ready():
-	state = State.FREE		
+	state = State.FREE
 	%enemy_ship_1.hide()
 	var viewport_size = get_viewport_rect().size
 	main_ship.position.x = viewport_size.x/2
@@ -79,17 +82,17 @@ func _ready():
 	dead_label.hide()
 	
 func restart_game():
-	health_bar.health = 100
+	status_bar.health = 100
 	main_ship_beam.hide()
 	target_beam.hide()
-	main_ship.free = true
+	enemy_beam.hide()
+	main_ship.camouflaged = true
 	spawn_enemies()
 	
 func aim_to_ship(ship_to_rotate:Node2D, target : Node2D):
 	var direction = target.global_position - ship_to_rotate.global_position
 	ship_to_rotate.rotation = direction.angle() - PI
-	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+
 func _process(delta):
 	#make the main ship aim it's locked enemy
 	if state == State.LOCKED:
@@ -100,12 +103,9 @@ func _process(delta):
 		aim_to_ship( current_ship.get_sprite(), main_ship.sprite)
 	else:
 		pass
-		
-	
 	#for i in enemy_ships.size():
 	#		var ship = enemy_ships[i]
 	#		aim_to_ship(ship.get_sprite(), main_ship)
-	
 	pass
 
 func remaining_ships()->int:
@@ -113,26 +113,22 @@ func remaining_ships()->int:
 	for ship in enemy_ships.size():
 		if enemy_ships[ship].is_destroyed():
 			ret = ret+1
-	
 	return enemy_ships.size()-ret
 	
 func key_missed():
 	shoot_received(12)
 	
 func shoot_received(hit_value : int):
-	if(health_bar.health>hit_value):
-		health_bar.health = health_bar.health-hit_value 
+	if(status_bar.health>hit_value):
+		status_bar.health = status_bar.health-hit_value 
 	else:
-		health_bar.health = 0
+		status_bar.health = 0
 		die()
 	
 func die():
 	state = State.DEAD
 	dead_label.show()
-	pass
 	
-
-
 func animate_shot(posA: Node2D, posB: Node2D):
 	var tween = get_tree().create_tween()
 	main_ship_beam.position = posA.position
@@ -141,7 +137,6 @@ func animate_shot(posA: Node2D, posB: Node2D):
 	tween.tween_property(main_ship_beam, "position", posB.position, 0.25)
 	tween.tween_property(main_ship_beam, "scale", Vector2(), 0.05)				
 	tween.tween_callback(main_ship_beam.hide)
-	pass
 	
 func _input(event):
 	if event is InputEventKey and event.pressed and not event.echo:
@@ -157,12 +152,12 @@ func _input(event):
 					print("Locked")
 					ship.make_locked()
 					main_ship.play_lock_sound()
-					main_ship.free = false
+					main_ship.camouflaged = false
 					current_ship = ship
 					self.state = State.LOCKED
 					target_beam.show()
 					break
-		elif state == State.LOCKED:
+		elif state == State.LOCKED: # SHOOT TO THE ENEMIES
 			var hit = current_ship.target_try(key)
 			if hit:
 				print("Hit!")
@@ -181,10 +176,10 @@ func _input(event):
 				animate_shot(current_ship,main_ship)
 				key_missed()
 			if current_ship.is_destroyed():
-				print("Hit and destroyed!")
+				print("Enemy destroyed!")
 				state = State.FREE
 				target_beam.hide()
-				main_ship.free = true
+				main_ship.camouflaged = true
 				main_ship.play_unlock_sound()
 				if remaining_ships()==0:
 					spawn_enemies()
