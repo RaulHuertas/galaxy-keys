@@ -112,22 +112,27 @@ func restart_game():
 func aim_to_ship(ship_to_rotate:Node2D, target : Node2D):
 	var direction = target.global_position - ship_to_rotate.global_position
 	ship_to_rotate.rotation = direction.angle() - PI
-
+	
+	
+@onready var prev_state = state
+@onready var was_camouflaged = main_ship.camouflaged
 func _process(delta):
 	#make the main ship aim it's locked enemy
-	if state == State.LOCKED:
+	var state_has_changed = prev_state != state
+	if state == State.LOCKED :
 		aim_to_ship(main_ship.sprite, current_ship.get_sprite())
 		target_beam.set_point_position(0, main_ship.position)
-		target_beam.set_point_position(1, current_ship.position)
-		
+		target_beam.set_point_position(1, current_ship.position)		
 		aim_to_ship( current_ship.get_sprite(), main_ship.sprite)
 	elif state == State.FREE:
-		if !main_ship.camouflaged:
+		var camo_changed = main_ship.camouflaged!=was_camouflaged
+		if !main_ship.camouflaged && camo_changed:
 			print("NO CAMO")
 			trigger_enemy_shot()
 			reactivate_camo()
 			shoot_received(18)
-			pass
+	was_camouflaged = main_ship.camouflaged
+	prev_state = state
 	#for i in enemy_ships.size():
 	#		var ship = enemy_ships[i]
 	#		aim_to_ship(ship.get_sprite(), main_ship)
