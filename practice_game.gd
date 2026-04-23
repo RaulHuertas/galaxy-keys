@@ -41,6 +41,7 @@ var camo_tween
 func reactivate_camo():
 	cancel_camo() # Abort the previous animation.
 	camo_tween = create_tween()
+	camo_tween.set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
 	main_ship.camouflaged = true
 	status_bar.camouflage = 100
 	camo_tween.tween_property(status_bar, "camouflage", 0, 1.0)
@@ -155,6 +156,7 @@ func die():
 	
 func animate_shot(posA: Node2D, posB: Node2D, sprite:Node2D = main_ship_beam):
 	var tween = get_tree().create_tween()
+	tween.set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
 	main_ship_beam.position = posA.position
 	main_ship_beam.scale = Vector2(1.0, 1.0)
 	main_ship_beam.show()
@@ -195,14 +197,7 @@ func _input(event):
 			if hit:
 				print("Hit!")
 				main_ship.play_shoot_sound()
-				animate_shot(main_ship, current_ship)
-				#var tween = get_tree().create_tween()
-				#main_ship_beam.position = main_ship.position
-				#main_ship_beam.scale = Vector2(1.0, 1.0)
-				#main_ship_beam.show()
-				#tween.tween_property(main_ship_beam, "position", current_ship.position, 0.25)
-				#tween.tween_property(main_ship_beam, "scale", Vector2(), 0.05)				
-				#tween.tween_callback(main_ship_beam.hide)				
+				animate_shot(main_ship, current_ship)		
 			else:
 				print("No Hit!")
 				main_ship.play_failed_sound()
