@@ -40,7 +40,7 @@ func get_target_array(level: int =0, limit: int = 1)->String:
 var camo_tween : Tween = null
 func reactivate_camo():
 	cancel_camo() # Abort the previous animation.
-	if state == State.FREE:
+	if (state==State.FREE) or (state==State.LOCKED):
 		camo_tween = create_tween()
 		camo_tween.set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
 		main_ship.camouflaged = true
@@ -129,8 +129,7 @@ func _process(delta):
 		target_beam.set_point_position(0, main_ship.position)
 		target_beam.set_point_position(1, current_ship.position)
 		aim_to_ship( current_ship.get_sprite(), main_ship.sprite)
-	elif state == State.FREE:
-		pass
+		
 	prev_state = state
 
 func remaining_ships()->int:
@@ -154,21 +153,32 @@ func die():
 	state = State.DEAD
 	dead_label.show()
 	
+func free_time()->float:
+	if state == State.FREE:
+		return 0.4
+	else:
+		return 0.3
+	
 func animate_shot(posA: Node2D, posB: Node2D, sprite:Node2D = main_ship_beam):
 	var tween = get_tree().create_tween()
 	tween.set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
 	sprite.position = posA.position
 	sprite.scale = Vector2(1.0, 1.0)
 	sprite.show()
-	tween.tween_property(sprite, "position", posB.position, 0.25)
+	tween.tween_property(sprite, "position", posB.position, free_time())
 	tween.tween_property(sprite, "scale", Vector2(), 0.05)				
 	tween.tween_callback(sprite.hide)
 	
 func trigger_enemy_shot():
 	for ship in enemy_ships:
-		if ship.visible:
-			animate_shot(ship, main_ship, enemy_ship_beam)
+		if state == State.FREE:
+			if ship.visible:
+				animate_shot(ship, main_ship, enemy_ship_beam)
+				main_ship.play_failed_sound()
+		if state == State.LOCKED:
+			animate_shot(current_ship, main_ship, enemy_ship_beam)
 			main_ship.play_failed_sound()
+
 	
 func _input(event):
 	if event is InputEventKey and event.pressed and not event.echo:
@@ -180,15 +190,17 @@ func _input(event):
 				restart_game()			
 		if state == State.FREE:
 			for ship in enemy_ships:
-				if ship.visible and ship.lock_sequence == key:
+				if ship.visible and ship.lock_sequence == key:# ENTER LOCKED STATE
 					print("Locked")
 					ship.make_locked()
 					main_ship.play_lock_sound()
-					main_ship.camouflaged = false
-					cancel_camo()
 					current_ship = ship
 					self.state = State.LOCKED
 					target_beam.show()
+					reactivate_camo()
+					# CAMO
+					#main_ship.camouflaged = false
+					#cancel_camo()
 					break
 			
 			
