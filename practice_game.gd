@@ -37,15 +37,16 @@ func get_target_array(level: int =0, limit: int = 1)->String:
 		result = result+(character_levels[level][random_index])
 	return result
 
-var camo_tween
+var camo_tween : Tween = null
 func reactivate_camo():
 	cancel_camo() # Abort the previous animation.
-	camo_tween = create_tween()
-	camo_tween.set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
-	main_ship.camouflaged = true
-	status_bar.camouflage = 100
-	camo_tween.tween_property(status_bar, "camouflage", 0, 1.0)
-	camo_tween.tween_callback(camo_down)
+	if state == State.FREE:
+		camo_tween = create_tween()
+		camo_tween.set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
+		main_ship.camouflaged = true
+		status_bar.camouflage = 100
+		camo_tween.tween_property(status_bar, "camouflage", 0, 1.0)
+		camo_tween.tween_callback(camo_down)
 	
 func cancel_camo():
 	if camo_tween:
@@ -132,8 +133,6 @@ func _process(delta):
 		pass
 	prev_state = state
 
-	pass
-
 func remaining_ships()->int:
 	var ret : int = 0
 	for ship in enemy_ships.size():
@@ -158,12 +157,12 @@ func die():
 func animate_shot(posA: Node2D, posB: Node2D, sprite:Node2D = main_ship_beam):
 	var tween = get_tree().create_tween()
 	tween.set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
-	main_ship_beam.position = posA.position
-	main_ship_beam.scale = Vector2(1.0, 1.0)
-	main_ship_beam.show()
-	tween.tween_property(main_ship_beam, "position", posB.position, 0.25)
-	tween.tween_property(main_ship_beam, "scale", Vector2(), 0.05)				
-	tween.tween_callback(main_ship_beam.hide)
+	sprite.position = posA.position
+	sprite.scale = Vector2(1.0, 1.0)
+	sprite.show()
+	tween.tween_property(sprite, "position", posB.position, 0.25)
+	tween.tween_property(sprite, "scale", Vector2(), 0.05)				
+	tween.tween_callback(sprite.hide)
 	
 func trigger_enemy_shot():
 	for ship in enemy_ships:
@@ -181,7 +180,7 @@ func _input(event):
 				restart_game()			
 		if state == State.FREE:
 			for ship in enemy_ships:
-				if ship.visible && ship.lock_sequence == key:
+				if ship.visible and ship.lock_sequence == key:
 					print("Locked")
 					ship.make_locked()
 					main_ship.play_lock_sound()

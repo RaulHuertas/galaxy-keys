@@ -1,7 +1,7 @@
 class_name EnemyShip
 extends Node2D
 
-@onready var sprite = %sprite
+@onready var sprite : AnimatedSprite2D = %sprite
 @onready var lock_label = %lock
 @onready var sprite_label = %target
 @onready var aim = %aim

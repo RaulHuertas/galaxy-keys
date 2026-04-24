@@ -11,7 +11,7 @@ extends Node2D
 			var style = health_bar.get_theme_stylebox("fill")
 			if value < health_bar.max_value * 0.3:
 				style.bg_color = Color.RED
-			if value < health_bar.max_value * 0.6:
+			elif value < health_bar.max_value * 0.6:
 				style.bg_color = Color.YELLOW
 			else:
 				style.bg_color = Color.GREEN
@@ -23,7 +23,7 @@ extends Node2D
 		camouflage = value
 		camouflage_bar.value = value
 	get():
-		return health
+		return camouflage
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
