@@ -52,8 +52,12 @@ func cancel_camo():
 		camo_tween.kill()
 
 func camo_down():
-	main_ship.camouflaged = false
-
+	shoot_received(18)
+	print("NO CAMO")
+	trigger_enemy_shot()
+	reactivate_camo()
+	
+	
 func spawn_enemies():
 	for ship in enemy_ships:
 		ship.queue_free()
@@ -122,20 +126,12 @@ func _process(delta):
 	if state == State.LOCKED :
 		aim_to_ship(main_ship.sprite, current_ship.get_sprite())
 		target_beam.set_point_position(0, main_ship.position)
-		target_beam.set_point_position(1, current_ship.position)		
+		target_beam.set_point_position(1, current_ship.position)
 		aim_to_ship( current_ship.get_sprite(), main_ship.sprite)
 	elif state == State.FREE:
-		var camo_changed = main_ship.camouflaged!=was_camouflaged
-		if !main_ship.camouflaged && camo_changed:
-			print("NO CAMO")
-			trigger_enemy_shot()
-			reactivate_camo()
-			shoot_received(18)
-	was_camouflaged = main_ship.camouflaged
+		pass
 	prev_state = state
-	#for i in enemy_ships.size():
-	#		var ship = enemy_ships[i]
-	#		aim_to_ship(ship.get_sprite(), main_ship)
+
 	pass
 
 func remaining_ships()->int:

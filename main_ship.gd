@@ -26,8 +26,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if free:
-		sprite.rotation = sprite.rotation+0.5*delta
+	pass
 
 func play_shoot_sound():
 	shoot_sound.play()
