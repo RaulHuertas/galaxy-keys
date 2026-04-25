@@ -1,4 +1,4 @@
-class_name EnemyShip
+class_name EnemyShip2
 extends Node2D
 
 @onready var sprite : AnimatedSprite2D = %sprite

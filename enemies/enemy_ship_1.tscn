@@ -1,0 +1,166 @@
+[gd_scene format=3 uid="uid://biwoyis7e0euu"]
+
+[ext_resource type="Script" uid="uid://dy7m8rc7s7r6x" path="res://enemies/enemy_ship_1.gd" id="1_vkgvv"]
+[ext_resource type="SpriteFrames" uid="uid://bnymged0trdtn" path="res://assets/flipbooks/enemy_ship_1.tres" id="2_g4uv2"]
+[ext_resource type="Texture2D" uid="uid://8n3ll77aehnw" path="res://assets/flipbooks/target.png" id="3_ci8me"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ss361"]
+atlas = ExtResource("3_ci8me")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p0qnh"]
+atlas = ExtResource("3_ci8me")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i5wbk"]
+atlas = ExtResource("3_ci8me")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4vryb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ss361")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p0qnh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i5wbk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2o1iv"]
+bg_color = Color(0.9916459, 0.9155579, 7.70092e-07, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7jqeu"]
+bg_color = Color(0.6, 0.9019608, 0.6, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="Animation" id="Animation_ntwbl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("aim:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("aim:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_ss361"]
+resource_name = "aim_scale"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("aim:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 1.95),
+"transitions": PackedFloat32Array(0.13397177, 5.8563395, 4.438277),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.5, 0.5), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("aim:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(-7.450581e-09, 0.41, 1.2899998),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 4.269075350378131, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p0qnh"]
+_data = {
+&"RESET": SubResource("Animation_ntwbl"),
+&"aim_scale": SubResource("Animation_ss361")
+}
+
+[node name="root" type="Node2D" unique_id=1759155857]
+script = ExtResource("1_vkgvv")
+
+[node name="sprite" type="AnimatedSprite2D" parent="." unique_id=1563110004]
+unique_name_in_owner = true
+texture_filter = 1
+sprite_frames = ExtResource("2_g4uv2")
+
+[node name="aim" type="AnimatedSprite2D" parent="." unique_id=1189556481]
+unique_name_in_owner = true
+texture_filter = 3
+sprite_frames = SubResource("SpriteFrames_4vryb")
+frame = 2
+frame_progress = 0.19616856
+
+[node name="lock" type="RichTextLabel" parent="." unique_id=546811768]
+unique_name_in_owner = true
+offset_left = -73.0
+offset_top = 45.0
+offset_right = 73.0
+offset_bottom = 85.0
+theme_override_font_sizes/normal_font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_2o1iv")
+bbcode_enabled = true
+text = "[color=blue]lo[/color][color=red]ck[/color]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="target" type="RichTextLabel" parent="." unique_id=425814790]
+unique_name_in_owner = true
+offset_left = -73.0
+offset_top = 45.0
+offset_right = 73.0
+offset_bottom = 85.0
+theme_override_font_sizes/normal_font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_7jqeu")
+bbcode_enabled = true
+text = "[color=blue]tar[/color][color=red]get[/color]"
+shortcut_keys_enabled = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="aim_anims" type="AnimationPlayer" parent="." unique_id=1757048659]
+unique_name_in_owner = true
+libraries/ = SubResource("AnimationLibrary_p0qnh")

@@ -1,19 +1,19 @@
-[gd_scene format=3 uid="uid://biwoyis7e0euu"]
+[gd_scene format=3 uid="uid://sn7o4kkcaoeq"]
 
-[ext_resource type="Script" uid="uid://dy7m8rc7s7r6x" path="res://enemy_ship_1.gd" id="1_7jqeu"]
-[ext_resource type="SpriteFrames" uid="uid://bnymged0trdtn" path="res://assets/flipbooks/enemy_ship_1.tres" id="1_mwu05"]
-[ext_resource type="Texture2D" uid="uid://8n3ll77aehnw" path="res://assets/flipbooks/target.png" id="3_ntwbl"]
+[ext_resource type="Script" uid="uid://b5c5xu1m65b6a" path="res://enemies/enemy_ship_2.gd" id="1_vkgvv"]
+[ext_resource type="SpriteFrames" uid="uid://bnymged0trdtn" path="res://assets/flipbooks/enemy_ship_1.tres" id="2_g4uv2"]
+[ext_resource type="Texture2D" uid="uid://8n3ll77aehnw" path="res://assets/flipbooks/target.png" id="3_ci8me"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ss361"]
-atlas = ExtResource("3_ntwbl")
+atlas = ExtResource("3_ci8me")
 region = Rect2(0, 0, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p0qnh"]
-atlas = ExtResource("3_ntwbl")
+atlas = ExtResource("3_ci8me")
 region = Rect2(96, 0, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i5wbk"]
-atlas = ExtResource("3_ntwbl")
+atlas = ExtResource("3_ci8me")
 region = Rect2(192, 0, 96, 96)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4vryb"]
@@ -120,12 +120,12 @@ _data = {
 }
 
 [node name="root" type="Node2D" unique_id=1759155857]
-script = ExtResource("1_7jqeu")
+script = ExtResource("1_vkgvv")
 
 [node name="sprite" type="AnimatedSprite2D" parent="." unique_id=1563110004]
 unique_name_in_owner = true
 texture_filter = 1
-sprite_frames = ExtResource("1_mwu05")
+sprite_frames = ExtResource("2_g4uv2")
 
 [node name="aim" type="AnimatedSprite2D" parent="." unique_id=1189556481]
 unique_name_in_owner = true

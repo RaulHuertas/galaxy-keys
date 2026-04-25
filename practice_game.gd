@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var enemy_ship_scene_1 : Resource = preload("res://enemy_ship_1.tscn")
+@onready var enemy_ship_scene_1 : Resource = preload("res://enemies/enemy_ship_1.tscn")
 
 #ui controls
 @onready var main_ship : MainShip = %main_ship
@@ -15,7 +15,8 @@ var enemy_ships : Array = []
 var current_ship : EnemyShip = null
 
 const characters_level_1 = ["f","g","h","j"]
-const character_levels : Array = [characters_level_1]
+const characters_level_2 = ["f","g","h","j","r","t","y","u","c","v","n","m"]
+const character_levels : Array = [characters_level_1,characters_level_2]
 
 enum State {
 	FREE,
