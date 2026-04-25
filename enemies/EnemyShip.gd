@@ -103,9 +103,6 @@ func target_try(typed: String)->bool:
 func get_sprite():
 	return sprite
 	
-	
-	
-		
 func is_destroyed()->bool:
 	return state == State.DESTROYED
 	

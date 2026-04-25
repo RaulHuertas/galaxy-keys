@@ -1,8 +1,37 @@
 [gd_scene format=3 uid="uid://sn7o4kkcaoeq"]
 
 [ext_resource type="Script" uid="uid://b5c5xu1m65b6a" path="res://enemies/enemy_ship_2.gd" id="1_vkgvv"]
-[ext_resource type="SpriteFrames" uid="uid://bnymged0trdtn" path="res://assets/flipbooks/enemy_ship_1.tres" id="2_g4uv2"]
+[ext_resource type="Texture2D" uid="uid://dt5jbqiomibes" path="res://assets/flipbooks/enemy_ship_2.png" id="2_vkgvv"]
 [ext_resource type="Texture2D" uid="uid://8n3ll77aehnw" path="res://assets/flipbooks/target.png" id="3_ci8me"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_llby8"]
+atlas = ExtResource("2_vkgvv")
+region = Rect2(0, 0, 82, 99)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oyeyk"]
+atlas = ExtResource("2_vkgvv")
+region = Rect2(82, 0, 82, 99)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vujwf"]
+atlas = ExtResource("2_vkgvv")
+region = Rect2(164, 0, 82, 99)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g0l41"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_llby8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oyeyk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vujwf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 9.0
+}]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ss361"]
 atlas = ExtResource("3_ci8me")
@@ -125,7 +154,9 @@ script = ExtResource("1_vkgvv")
 [node name="sprite" type="AnimatedSprite2D" parent="." unique_id=1563110004]
 unique_name_in_owner = true
 texture_filter = 1
-sprite_frames = ExtResource("2_g4uv2")
+sprite_frames = SubResource("SpriteFrames_g0l41")
+frame = 1
+frame_progress = 0.10097796
 
 [node name="aim" type="AnimatedSprite2D" parent="." unique_id=1189556481]
 unique_name_in_owner = true

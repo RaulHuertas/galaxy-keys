@@ -1,6 +1,5 @@
 extends Node2D
 
-@onready var enemy_ship_scene_1 : Resource = preload("res://enemies/enemy_ship_1.tscn")
 
 #ui controls
 @onready var main_ship : MainShip = %main_ship
@@ -17,6 +16,21 @@ var current_ship : EnemyShip = null
 const characters_level_1 = ["f","g","h","j"]
 const characters_level_2 = ["f","g","h","j","r","t","y","u","c","v","n","m"]
 const character_levels : Array = [characters_level_1,characters_level_2]
+
+
+@onready var enemy_ship_scene_1 : Resource = preload("res://enemies/enemy_ship_1.tscn")
+@onready var enemy_ship_scene_2 : Resource = preload("res://enemies/enemy_ship_2.tscn")
+@onready var enemies_level_1 : Array = [enemy_ship_scene_1]
+@onready var enemies_level_2 : Array = [enemy_ship_scene_1,enemy_ship_scene_2]
+@onready var enemies = [
+	enemies_level_1,
+	enemies_level_2
+]
+
+func getRandomEnemyInstance(level: int)->Node:
+	var n_enemies : int = enemies[level].size()
+	var index : int = randi_range(0, n_enemies-1)
+	return enemies[level][index].instantiate()
 
 enum State {
 	FREE,
@@ -73,7 +87,8 @@ func spawn_enemies():
 	
 	var enemies_to_spawn = min(character_levels[current_level].size(),9)
 	for enemy in enemies_to_spawn:
-		var new_ship = enemy_ship_scene_1.instantiate()
+		#var new_ship = enemy_ship_scene_2.instantiate()
+		var new_ship = getRandomEnemyInstance(1)
 		var random_angle = randf_range(0.25*PI, -1.25*PI)
 		var random_range = randf_range(min_range, max_range)
 		var random_radius = random_range*radius
