@@ -210,7 +210,8 @@ func _input(event):
 			if hit:
 				print("Hit!")
 				main_ship.play_shoot_sound()
-				animate_shot(main_ship, current_ship)		
+				animate_shot(main_ship, current_ship)
+				reactivate_camo()
 			else:
 				print("No Hit!")
 				main_ship.play_failed_sound()
