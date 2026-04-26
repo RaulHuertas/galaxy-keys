@@ -119,6 +119,8 @@ func _ready():
 	restart_game()
 	#ui
 	dead_label.hide()
+	#sound 
+	%background_music.playing = true
 	
 func restart_game():
 	status_bar.health = 100

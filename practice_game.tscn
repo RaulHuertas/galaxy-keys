@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://t3coxrbls8x6" path="res://HealthBar.tscn" id="6_hq0y4"]
 [ext_resource type="Texture2D" uid="uid://cmh0w2un4bpuy" path="res://assets/flipbooks/main_ship_beam_center.png" id="6_j8y42"]
 [ext_resource type="Script" uid="uid://bqlyn7ugfjunv" path="res://health_bar.gd" id="7_62tn4"]
+[ext_resource type="AudioStream" uid="uid://bu4dp7a3cbviu" path="res://assets/sounds/background_music.mp3" id="9_golhh"]
 
 [sub_resource type="Gradient" id="Gradient_dy8u4"]
 
@@ -152,3 +153,8 @@ bbcode_enabled = true
 text = "Try [color=red]A[/color]gain"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="background_music" type="AudioStreamPlayer2D" parent="." unique_id=1337093420]
+unique_name_in_owner = true
+stream = ExtResource("9_golhh")
+parameters/looping = true
