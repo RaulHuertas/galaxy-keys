@@ -5,3 +5,4 @@ extends EnemyShip
 func _ready():
 	super._ready()
 	super.assign(%sprite,%lock,%target,%aim,%aim_anims)
+	damage = 8

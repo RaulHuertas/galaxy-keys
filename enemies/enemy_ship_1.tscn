@@ -121,6 +121,7 @@ _data = {
 
 [node name="root" type="Node2D" unique_id=1759155857]
 script = ExtResource("1_vkgvv")
+damage = null
 
 [node name="sprite" type="AnimatedSprite2D" parent="." unique_id=1563110004]
 unique_name_in_owner = true

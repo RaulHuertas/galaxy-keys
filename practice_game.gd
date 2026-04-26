@@ -27,6 +27,8 @@ const character_levels : Array = [characters_level_1,characters_level_2]
 	enemies_level_2
 ]
 
+@export var inactivity_damage = 5
+
 func getRandomEnemyInstance(level: int)->Node:
 	var n_enemies : int = enemies[level].size()
 	var index : int = randi_range(0, n_enemies-1)
@@ -68,7 +70,7 @@ func cancel_camo():
 		camo_tween.kill()
 
 func camo_down():
-	shoot_received(18)
+	shoot_received(inactivity_damage)
 	print("NO CAMO")
 	trigger_enemy_shot()
 	reactivate_camo()
@@ -158,7 +160,7 @@ func remaining_ships()->int:
 	return enemy_ships.size()-ret
 	
 func key_missed():
-	shoot_received(12)
+	shoot_received(current_ship.damage)
 	
 func shoot_received(hit_value : int):
 	if(status_bar.health>hit_value):

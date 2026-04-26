@@ -108,6 +108,7 @@ antialiased = true
 [node name="enemy_ship_1" parent="." unique_id=1759155857 instance=ExtResource("3_mwu5k")]
 unique_name_in_owner = true
 position = Vector2(1166, 141)
+damage = 10
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=341435190]
 libraries/ = SubResource("AnimationLibrary_dur40")

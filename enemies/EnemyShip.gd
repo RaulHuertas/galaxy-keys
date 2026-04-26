@@ -14,6 +14,7 @@ var target_position: int = 0
 var index : int = 0
 var error_limit = 3
 var error_count = 0
+@export var damage = 10
 @onready var rot_direction : float = randf_range(-1,1)
 
 enum State {
